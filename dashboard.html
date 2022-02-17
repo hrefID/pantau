@@ -36,7 +36,7 @@
 
     document.querySelector('.login').addEventListener('click', (e)=>{
       e.preventDefault();
-      localStorage.setItem('username', 'null');
+      localStorage.removeItem('username');
       window.location.href = '/login.html';
     })
   </script>

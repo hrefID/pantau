@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/splide.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <title>PANTAU | Pantau Dini, Keluarga Terlindungi</title>
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">
+      <img src="images/logo.png" alt="">
+    </a>
+    <ul class="menus">
+      <li><a href="/">Home</a></li>
+      <li><a href="our-product.html">Our Product</a></li>
+      <li><a href="about-us.html">About Us</a></li>
+      <li><a href="login.html" class="login">Login</a></li>
+    </ul>
+  </nav>
+  <div class="content">
+    <div class="splide" id="image-slider">
+      <div class="splide__track">
+        <ul class="splide__list">
+          <li class="splide__slide bg-top-center">
+            <img src="images/slide1.jpg" alt="">
+            <div class="splide__text">
+              <p>Menjadi Mitra Terpercaya untuk memenuhi kebutuhan pengawasan dari mana saja dan kapan saja</p>
+            </div>
+          </li>
+          <li class="splide__slide bg-center-center">
+            <img src="images/slide2.jpg" alt="">
+            <div class="splide__text">
+              <h3>Apa itu PANTAU?</h3>
+              <p>Pantau adalah grup yang mempunyai fokus dalam sistem pengawasan melalui media smartwatch dengan menerapkan prinsip IoT
+              </p>
+            </div>
+          </li>
+          <li class="splide__slide bg-center-center">
+            <img src="images/slide3.jpg" alt="">
+            <div class="splide__text">
+              <p>Saat ini Pantau sedang fokus mengembangkan smartwatch berbasis IoT untuk menangani bidang kesehatan terutama yang sedang terkait dengan Covid-19</p>
+            </div>
+          </li>
+          <li class="splide__slide bg-center-center">
+            <img src="images/slide4.jpg" alt="">
+            <div class="splide__text big-text">
+              <p>#Pantau Dini, Keluarga Terlindungi</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/splide.min.js"></script>
+  <script>
+    document.addEventListener( 'DOMContentLoaded', function() {
+      var splide = new Splide( '#image-slider', {
+        width : '100vw',
+		    height: '400px',
+        type: 'loop',
+        cover: true,
+        heightRatio: 0.5,
+      } );
+      splide.mount();
+    } );
+  </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/splide.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <title>PANTAU | Dashboard</title>
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">
+      <img src="images/logo.png" alt="">
+    </a>
+    <ul class="menus">
+      <li>Hello, <span class="username-placeholder"></span>!</li>
+      <li><a href="login.html" class="login">Logout</a></li>
+    </ul>
+  </nav>
+  <div class="content">
+    <h1>HELLO WORLD</h1>
+  </div>
+
+  <script>
+    var name = localStorage.getItem("username");
+    document.addEventListener('DOMContentLoaded', ()=>{
+      if (name == '' || name == 'null'){
+        alert('You need to login to access this page!');
+        window.location.href = '/login.html';
+      } else{
+        document.querySelector('.username-placeholder').innerHTML = name;
+      }
+    })
+
+    document.querySelector('.login').addEventListener('click', (e)=>{
+      e.preventDefault();
+      localStorage.setItem('username', 'null');
+      window.location.href = '/login.html';
+    })
+  </script>
+</body>
+</html>

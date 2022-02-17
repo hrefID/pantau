@@ -53,8 +53,9 @@
 
     document.addEventListener('DOMContentLoaded', ()=>{
       if (localStorage.getItem('username') != '' && localStorage.getItem('username') != 'null'){
-        window.location.href = '/dashboard.html';
+        // window.location.href = '/dashboard.html';
       }
+      console.log(localStorage.getItem('username'));
     })
 
     document.querySelector('.login-submit').addEventListener('click', (e)=>{

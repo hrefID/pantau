@@ -108,11 +108,17 @@ nav{
     height: calc(100vh - 65px);
     width: 100vw;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     display: none;
   }
 
+  .menus a{
+    margin: 0 !important;
+  }
+  .menus li{
+    margin: 1rem 0 !important;
+  }
   .show-menu{
     display: flex !important;
   }
@@ -160,6 +166,11 @@ nav{
   font-size: 3rem;
 }
 
+@media only screen and (max-width: 768px){
+  .splide__text{
+    font-size: 1rem;
+  }
+}
 /* ABOUT US */
 .about-grid{
   width: 60vw;
@@ -195,6 +206,16 @@ nav{
 .person-text{
   text-align: center;
   color: #4388F5;
+}
+
+@media only screen and (max-width: 576px){
+  .about-grid{
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .about-grid .flex-center{
+    margin: 2rem 0;
+  }
 }
 
 /* OUR PRODUCT */
@@ -288,6 +309,31 @@ nav{
   margin-right: 2.5rem;
 }
 
+@media only screen and (max-width: 996px){
+  .products{
+    flex-direction: column;
+    align-items: center;
+  }
+  .product-list{
+    margin: 0;
+    margin-bottom: 2.5rem;
+  }
+}
+
+@media only screen and (max-width: 568px){
+  .products, .product-title{
+    padding: 0 2rem;
+  }
+
+  .product-list{
+    width: 100%;
+    border-radius: 20px;
+  }
+  .product-list-title{
+    border-radius: 20px 20px 0 0;
+  }
+}
+
 /* PANTAU COVID PAGE */
 .pantau-covid-title{
   display: flex;
@@ -330,6 +376,18 @@ nav{
 .pantau-covid-item-name{
   font-weight: 600;
   margin-top: 1em;
+}
+
+@media only screen and (max-width: 996px){
+  .pantau-covid-grid{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 576px){
+  .pantau-covid-grid{
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 /* login page */

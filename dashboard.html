@@ -18,11 +18,15 @@
       <li>Hello, <span class="username-placeholder"></span>!</li>
       <li><a href="login.html" class="login">Logout</a></li>
     </ul>
+    <a href="#" class="hamburger">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z"/></svg>
+    </a>
   </nav>
   <div class="content">
     <h1>HELLO WORLD</h1>
   </div>
 
+  <script src="js/main.js"></script>
   <script>
     var name = localStorage.getItem("username");
     document.addEventListener('DOMContentLoaded', ()=>{

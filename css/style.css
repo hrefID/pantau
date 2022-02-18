@@ -78,6 +78,46 @@ nav{
   padding-top: 65px;
 }
 
+.hamburger{
+  display: none;
+  fill: #4388F5;
+}
+
+@media only screen and (max-width: 992px){
+  nav{
+    padding: 0 50px;
+  }
+  .menus a{
+    margin-left: 1rem;
+  }
+  .login{
+    margin-left: 1.25rem !important;
+  }
+}
+
+@media only screen and (max-width: 768px){
+  .hamburger{
+    display: flex;
+
+  }
+  .menus{
+    background-color: #fff;
+    position: absolute;
+    top: 65px;
+    left: 0px;
+    height: calc(100vh - 65px);
+    width: 100vw;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    display: none;
+  }
+
+  .show-menu{
+    display: flex !important;
+  }
+}
+
 /* HOME */
 .splide__slide img {
   width: 100%;
@@ -356,3 +396,4 @@ nav{
   color: #4388F5;
   font-size: 15px;
 }
+

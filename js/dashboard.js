@@ -81,7 +81,7 @@ function updateMarker(){
     data_arr[i] = feeds_arr[feeds_arr.length - 1]
   })
 
-  // console.log(data_arr);
+  console.log(data_arr);
 
   data_arr.forEach((el, i) => {
     // Set the status
@@ -98,12 +98,61 @@ function updateMarker(){
 
   //Set marker popup
   marker_arr.forEach((marker, i) => {
-    marker.bindPopup(`<b class='bold'>Device ` + (i+1) + `</b><br>Longitude: ` + marker.getLatLng().lat + `<br>Altitude: ` + marker.getLatLng().lng);
+    marker.bindPopup(`<b class='bold'>Device ` + (i+1) + `</b><br>Longitude: ` + marker.getLatLng().lat + `<br>Latitude: ` + marker.getLatLng().lng);
+  })
+}
+
+function popNotification(deviceName, message, temp, so2, heart, lng, lat){
+  var newDiv = document.createElement('div');
+  newDiv.className = 'notification';
+
+  var crossElement = document.createElement('a');
+  var leftCross = document.createElement('div');
+  var rightCross = document.createElement('div');
+
+  crossElement.setAttribute('href', '#');
+  crossElement.className = 'cross';
+  leftCross.className = 'left-cross';
+  rightCross.className = 'right-cross';
+  
+  crossElement.appendChild(leftCross);
+  crossElement.appendChild(rightCross);
+  newDiv.appendChild(crossElement);
+
+  newDiv.appendChild(document.createElement('h3')).appendChild(document.createTextNode(`Warning on ` + deviceName + `!`));
+  newDiv.appendChild(document.createElement('h4')).appendChild(document.createTextNode(message));
+  newDiv.appendChild(document.createElement('p')).appendChild(document.createTextNode(`Temp:`+ temp +` | SO2: `+ so2 +` | Heartbeat: `+ heart));
+  newDiv.appendChild(document.createElement('p')).appendChild(document.createTextNode(`Longitude: `+ lng +` | Latitude: `+ lat));
+
+  var notificationsDiv = document.querySelector('.notifications');
+  notificationsDiv.insertBefore(newDiv, notificationsDiv.lastChild);
+  document.getElementById('notificationAudio').play();
+  
+  document.querySelectorAll('.cross').forEach((a) => {
+    a.addEventListener( 'click' , (e) => {
+      e.preventDefault();
+      a.parentElement.remove();
+      document.getElementById('notificationAudio').pause();
+      document.getElementById('notificationAudio').currentTime = 0;
+    })
   })
 }
 
 updateMarker();
-setInterval(updateMarker, 2000);
+// setInterval(updateMarker, 2000);
+
+// setInterval(() => {
+//   document.getElementById('notificationAudio').pause();
+//   document.getElementById('notificationAudio').currentTime = 0;
+//   popNotification('Device 3', 'The heartbeat is too low!', 40, 40, 40, -23.6, 60.3);
+// }, 3000)
+
+document.querySelector('.person-history').addEventListener('click', (e) => {
+  e.preventDefault();
+  document.getElementById('notificationAudio').pause();
+  document.getElementById('notificationAudio').currentTime = 0;
+  popNotification('Device 3', 'The heartbeat is too low!', 40, 40, 40, -23.6, 60.3);
+})
 
 // setTimeout(() =>{
 //   marker_1.setLatLng([-6.360, 106.824])

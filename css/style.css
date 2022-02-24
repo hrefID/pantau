@@ -595,8 +595,78 @@ nav{
   flex-direction: column;
 }
 
-.person-name{
+.person-name{ 
   align-self: center;
   font-weight: 800;
   margin-bottom: 20px;
+}
+
+.notifications{
+  position: absolute;
+  bottom: 0;
+  z-index: 10;
+  padding: 20px;
+}
+
+.notification{
+  width: 300px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 10px;
+  position: relative;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.notification a{
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  /* background-color: aqua; */
+  top: 0;
+  right: 0;
+  margin: 10px;
+}
+
+.notification a .left-cross, .notification a .right-cross{
+  background-color: #000;
+  width: 100%;
+  height: 5px;
+  position: absolute;
+  top: 50%;
+  border-radius: 5px;
+  transform-origin: center center;
+  transform: translate(0, -50%);
+  transition: all ease .1s;
+}
+
+.notification a .left-cross{
+  transform: rotate(45deg);
+}
+
+.notification a .right-cross{
+  transform: rotate(-45deg);
+}
+
+.notification a:hover .left-cross, .notification a:hover .right-cross{
+  background-color: #4388F5;
+}
+
+.notification h3{
+  font-weight: 800;
+}
+
+.notification p{
+  font-size: 0.8rem;
+}
+
+@media only screen and (max-width: 576px){
+  .notifications{
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
+  .notification{
+    width: 90vw;
+  }
 }

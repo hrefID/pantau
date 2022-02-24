@@ -11,6 +11,10 @@
   <title>PANTAU | Dashboard</title>
 </head>
 <body style="overflow-x: hidden">
+  <audio id="notificationAudio">
+    <source src="audio/notification.ogg" type="audio/ogg">
+    <source src="audio/notification.mp3" type="audio/mpeg">
+  </audio>
   <nav>
     <a href="/" class="logo">
       <img src="images/logo.png" alt="">
@@ -38,7 +42,7 @@
           <p>spo2: <span class="person-spo2"></span></p>
           <p>Heart Rate: <span class="person-hr"></span></p>
           <p>Longitude: <span class="person-long"></span></p> 
-          <p>Altitude: <span class="person-alt"></span></p> 
+          <p>Latitude: <span class="person-lat"></span></p> 
           <p>Panic Button: <span class="person-panic"></span></p>
           <a href="#" target="_blank" class="person-history">History</a> 
         </div>
@@ -48,7 +52,7 @@
           <p>spo2: <span class="person-spo2"></span></p>
           <p>Heart Rate: <span class="person-hr"></span></p>
           <p>Longitude: <span class="person-lt"></span></p>
-          <p>Altitude: <span class="person-alt"></span></p> 
+          <p>Latitude: <span class="person-lat"></span></p> 
           <p>Panic Button: <span class="person-panic"></span></p> 
           <a href="#" target="_blank" class="person-history">History</a> 
         </div>
@@ -58,7 +62,7 @@
           <p>spo2: <span class="person-spo2"></span></p>
           <p>Heart Rate: <span class="person-hr"></span></p>
           <p>Longitude: <span class="person-lt"></span></p>
-          <p>Altitude: <span class="person-alt"></span></p> 
+          <p>Latitude: <span class="person-lat"></span></p> 
           <p>Panic Button: <span class="person-panic"></span></p> 
           <a href="#" target="_blank" class="person-history">History</a> 
         </div>
@@ -68,12 +72,23 @@
           <p>spo2: <span class="person-spo2"></span></p>
           <p>Heart Rate: <span class="person-hr"></span></p>
           <p>Longitude: <span class="person-lt"></span></p>
-          <p>Altitude: <span class="person-alt"></span></p> 
+          <p>Latitude: <span class="person-lat"></span></p> 
           <p>Panic Button: <span class="person-panic"></span></p> 
           <a href="#" target="_blank" class="person-history">History</a> 
         </div>
       </div>
     </div>
+    <div class="notifications">
+      <!-- <div class="notification">
+        <a href="#" class="cross">
+          <div class="left-cross"></div>
+          <div class="right-cross"></div>
+        </a>
+        <h3>Warning on Device 1!</h3>
+        <h4>The device is out of range!</h4>
+        <p>Temp: 40 | SO2: 40 | Heartbeat: 40</p>
+        <p>Longitude: -23.1 | Latitude: 13.5</p>
+      </div> -->
   </div>
   <script src="js/leaflet.js"></script>
   <script src="js/main.js"></script>

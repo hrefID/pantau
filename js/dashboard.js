@@ -70,7 +70,7 @@ var marker_arr = [marker_1, marker_2, marker_3, marker_4]
 var data_arr = [];
 var api_url = [
   'https://api.thingspeak.com/channels/1647842/feeds.json?api_key=BG370R10VM3PR7BC&results=2', 
-  'https://api.thingspeak.com/channels/1647842/feeds.json?api_key=BG370R10VM3PR7BC&results=2', 
+  // 'https://api.thingspeak.com/channels/1647842/feeds.json?api_key=BG370R10VM3PR7BC&results=2', 
 ];
 
 
@@ -89,7 +89,9 @@ function updateMarker(){
     personStatus.querySelector('.person-suhu').innerHTML = el.field3 ? el.field3 : 'null' ;
     personStatus.querySelector('.person-spo2').innerHTML = el.field1 ? el.field1 : 'null' ;
     personStatus.querySelector('.person-hr').innerHTML = el.field2 ? el.field2 : 'null'  ;
-
+    personStatus.querySelector('.person-long').innerHTML = el.field5 ? el.field5 : 'null'  ;
+    personStatus.querySelector('.person-lat').innerHTML = el.field6 ? el.field6 : 'null'  ;
+    
     //Set the marker position
     //marker_arr[i].setLatLng
 
@@ -139,7 +141,7 @@ function popNotification(deviceName, message, temp, so2, heart, lng, lat){
 }
 
 updateMarker();
-// setInterval(updateMarker, 2000);
+setInterval(updateMarker, 2000);
 
 // setInterval(() => {
 //   document.getElementById('notificationAudio').pause();

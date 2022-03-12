@@ -347,8 +347,18 @@ document.querySelectorAll(".person-name").forEach((a) => {
       ],
       16
     );
+
+    if (document.documentElement.clientWidth < 768) {
+      document.querySelector(".toolbar").classList.toggle("toolbar-active");
+      document
+        .querySelector(".toolbar-toggle")
+        .querySelector("path").attributes.d.value =
+        "M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z";
+    }
   });
 });
+
+console.log(document.documentElement.clientWidth);
 
 // setTimeout(() =>{
 //   marker_1.setLatLng([-6.360, 106.824])

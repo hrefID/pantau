@@ -114,6 +114,7 @@ for (i = 0; i < 4; i++) {
 var api_panic = [
   "https://api.thingspeak.com/channels/1662283/feeds.json?api_key=D8HQD2OAKS3BFQ5C&results=1",
   "https://api.thingspeak.com/channels/1662283/feeds.json?api_key=D8HQD2OAKS3BFQ5C&results=1",
+  "https://api.thingspeak.com/channels/1662283/feeds.json?api_key=D8HQD2OAKS3BFQ5C&results=1",
 ];
 
 var firstFetch = true;
@@ -246,15 +247,15 @@ function updateMarker() {
         statusPersonDiv.remove("person-status-limit");
         statusPersonDiv.remove("person-status-panic");
       }
-    } else if (marker_bool[i].out.every((arr) => arr === true)) {
-      marker.setIcon(redIcon);
-      statusPersonDiv.add("person-status-out");
-      statusPersonDiv.remove("person-status-limit");
-      statusPersonDiv.remove("person-status-panic");
     } else if (marker_bool[i].limit) {
       marker.setIcon(blackIcon);
       statusPersonDiv.remove("person-status-out");
       statusPersonDiv.add("person-status-limit");
+      statusPersonDiv.remove("person-status-panic");
+    } else if (marker_bool[i].out.every((arr) => arr === true)) {
+      marker.setIcon(redIcon);
+      statusPersonDiv.add("person-status-out");
+      statusPersonDiv.remove("person-status-limit");
       statusPersonDiv.remove("person-status-panic");
     } else {
       marker.setIcon(blueIcon);

@@ -36,7 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Map Settings
-var map = L.map("map-db").setView([-6.362480397433, 106.82404411061857], 16);
+var map = L.map("map-db").setView([-6.274997, 106.844044], 16);
+// var map = L.map("map-db").setView([-6.362480397433, 106.82404411061857], 16);
 
 L.tileLayer(
   "https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=vPVqdMuRowKnXesdqmzl",
@@ -83,26 +84,43 @@ var circleTwo = L.circle([-6.368080397433, 106.82404411061857], {
   fillOpacity: 0.3,
   radius: 200,
 }).addTo(map);
+var circleThree = L.circle([-6.274997, 106.848044], {
+  color: "green",
+  fillColor: "#007820",
+  fillOpacity: 0.3,
+  radius: 200,
+}).addTo(map);
 var circle_arr = [circleOne, circleTwo];
 
 // Markers Configuration
 var marker_1 = L.marker([-6.362, 106.824], { icon: blueIcon }).addTo(map);
-var marker_2 = L.marker([-6.363, 106.823], { icon: blueIcon }).addTo(map);
-var marker_3 = L.marker([-6.366, 106.825], { icon: blueIcon }).addTo(map);
-var marker_4 = L.marker([-6.367, 106.824], { icon: blueIcon }).addTo(map);
-var marker_arr = [marker_1, marker_2, marker_3, marker_4];
+// var marker_2 = L.marker([-6.363, 106.823], { icon: blueIcon }).addTo(map);
+// var marker_3 = L.marker([-6.366, 106.825], { icon: blueIcon }).addTo(map);
+// var marker_4 = L.marker([-6.367, 106.824], { icon: blueIcon }).addTo(map);
+// var marker_arr = [marker_1, marker_2, marker_3, marker_4];
+var marker_arr = [marker_1];
 
+var panic_payload = [],
+  marker_bool = [],
+  data_arr = [],
+  firstFetch = true;
+
+// put the corresponding api and public channel in the array
 var api_url = [
   "https://api.thingspeak.com/channels/1647842/feeds.json?api_key=BG370R10VM3PR7BC&results=1",
   // "https://api.thingspeak.com/channels/1647842/feeds.json?api_key=BG370R10VM3PR7BC&results=1",
 ];
+var api_panic = [
+  "https://api.thingspeak.com/channels/1662283/feeds.json?api_key=D8HQD2OAKS3BFQ5C&results=1",
+  // "https://api.thingspeak.com/channels/1662283/feeds.json?api_key=D8HQD2OAKS3BFQ5C&results=1",
+  // "https://api.thingspeak.com/channels/1662283/feeds.json?api_key=D8HQD2OAKS3BFQ5C&results=1",
+];
+var history_url = [
+  "https://thingspeak.com/channels/1647842",
+  // "https://thingspeak.com/channels/1647842",
+];
 
-var panic_payload = [],
-  marker_bool = [],
-  data_arr = [];
-
-for (i = 0; i < 4; i++) {
-  // marker_bool.push(new Object({ out: [false, false], limit: false, panic: false }));
+for (i = 0; i < api_url.length; i++) {
   marker_bool.push(
     new Object({
       out: new Array(circle_arr.length).fill(false),
@@ -111,13 +129,12 @@ for (i = 0; i < 4; i++) {
     })
   );
 }
-var api_panic = [
-  "https://api.thingspeak.com/channels/1662283/feeds.json?api_key=D8HQD2OAKS3BFQ5C&results=1",
-  "https://api.thingspeak.com/channels/1662283/feeds.json?api_key=D8HQD2OAKS3BFQ5C&results=1",
-  "https://api.thingspeak.com/channels/1662283/feeds.json?api_key=D8HQD2OAKS3BFQ5C&results=1",
-];
 
-var firstFetch = true;
+history_url.forEach((link, i) => {
+  document
+    .querySelectorAll(".person-status")
+    [i].querySelector(".person-history").href = link;
+});
 
 function updateMarker() {
   api_url.forEach((url, i) => {
@@ -146,6 +163,7 @@ function updateMarker() {
   });
 
   firstFetch = false;
+  // console.log(panic_payload)
 
   data_arr.forEach((el, i) => {
     // Set the status
@@ -267,7 +285,7 @@ function updateMarker() {
   // console.log(marker_bool);
 }
 updateMarker();
-setInterval(updateMarker, 1000);
+// setInterval(updateMarker, 1000);
 
 function popNotification(deviceName, message, temp, so2, heart, lng, lat) {
   var newDiv = document.createElement("div");
@@ -319,20 +337,22 @@ function popNotification(deviceName, message, temp, so2, heart, lng, lat) {
   });
 }
 
-document.querySelector(".person-history").addEventListener("click", (e) => {
-  e.preventDefault();
-  document.getElementById("notificationAudio").pause();
-  document.getElementById("notificationAudio").currentTime = 0;
-  popNotification(
-    "Device 3",
-    "The heartbeat is too low!",
-    40,
-    40,
-    40,
-    -23.6,
-    60.3
-  );
-});
+document
+  .querySelectorAll(".person-history")[3]
+  .addEventListener("click", (e) => {
+    e.preventDefault();
+    document.getElementById("notificationAudio").pause();
+    document.getElementById("notificationAudio").currentTime = 0;
+    popNotification(
+      "Device 3",
+      "The heartbeat is too low!",
+      40,
+      40,
+      40,
+      -23.6,
+      60.3
+    );
+  });
 
 document.querySelectorAll(".person-name").forEach((a) => {
   a.addEventListener("click", (e) => {
@@ -340,13 +360,15 @@ document.querySelectorAll(".person-name").forEach((a) => {
     var el = e.target.parentElement;
     var elIndex = divs.indexOf(el);
 
-    map.setView(
-      [
-        marker_arr[elIndex].getLatLng().lat,
-        marker_arr[elIndex].getLatLng().lng,
-      ],
-      16
-    );
+    if (marker_arr[elIndex]) {
+      map.setView(
+        [
+          marker_arr[elIndex].getLatLng().lat,
+          marker_arr[elIndex].getLatLng().lng,
+        ],
+        16
+      );
+    } else alert("The device is not available");
   });
 });
 

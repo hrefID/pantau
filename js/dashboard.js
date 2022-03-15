@@ -369,8 +369,18 @@ document.querySelectorAll(".person-name").forEach((a) => {
         16
       );
     } else alert("The device is not available");
+
+    if (document.documentElement.clientWidth < 768) {
+      document.querySelector(".toolbar").classList.toggle("toolbar-active");
+      document
+        .querySelector(".toolbar-toggle")
+        .querySelector("path").attributes.d.value =
+        "M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z";
+    }
   });
 });
+
+// console.log(document.documentElement.clientWidth);
 
 // setTimeout(() =>{
 //   marker_1.setLatLng([-6.360, 106.824])

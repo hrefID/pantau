@@ -8,6 +8,7 @@ var devices_arr = [
       "https://api.thingspeak.com/channels/1662283/feeds.json?api_key=D8HQD2OAKS3BFQ5C&results=1",
     history_url: "https://thingspeak.com/channels/1647842",
     active: false,
+    id: 1,
   },
   {
     device_name: "Alvin Filipi",
@@ -17,6 +18,7 @@ var devices_arr = [
       "https://api.thingspeak.com/channels/1662283/feeds.json?api_key=D8HQD2OAKS3BFQ5C&results=1",
     history_url: "https://thingspeak.com/channels/1647842",
     active: false,
+    id: 2,
   },
   {
     device_name: "Joe Biden",
@@ -26,6 +28,7 @@ var devices_arr = [
       "https://api.thingspeak.com/channels/1662283/feeds.json?api_key=D8HQD2OAKS3BFQ5C&results=1",
     history_url: "https://thingspeak.com/channels/1647842",
     active: false,
+    id: 3,
   },
   {
     device_name: "Joe Biden2",
@@ -35,6 +38,7 @@ var devices_arr = [
       "https://api.thingspeak.com/channels/1662283/feeds.json?api_key=D8HQD2OAKS3BFQ5C&results=1",
     history_url: "https://thingspeak.com/channels/1647842",
     active: false,
+    id: 4,
   },
 ];
 
@@ -63,9 +67,17 @@ var circleOption = {
   fillColor: "#007820",
   fillOpacity: 0.3,
   radius: 200,
-}
+};
 
-// Params Settting [MIN, MAX], set to null for no params
-const TEMP_PARAMS = [null, 37.5]
-const SPO2_PARAMS = [93, 100]
-const HR_PARAMS = [50, 100]
+// Params Setting [MIN, MAX], set to null for no params
+const TEMP_PARAMS = [null, 37.5];
+const SPO2_PARAMS = [93, 100];
+const HR_PARAMS = [50, 100];
+
+// Time Setting (seconds)
+const INACTIVITY_DURATION = 60;
+const NOTIFICATION_STALE_DURATION = 60;
+
+// CONTENT RESOURCE
+const PARAMS_MSG = "Parameter di luar limit!";
+const PANIC_MSG = "Panic Button ditekan!"

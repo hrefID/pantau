@@ -1,6 +1,6 @@
 // Map Settings
 // var map = L.map("map-db").setView([-6.274997, 106.844044], 16); // production
-var map = L.map("map-db").setView([-6.362480397433, 106.82404411061857], 16);
+var map = L.map("map-db").setView([-6.362480397433, 106.82404411061857], 16); // development
 
 L.tileLayer(
   "https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=vPVqdMuRowKnXesdqmzl",
@@ -15,9 +15,8 @@ L.tileLayer(
 ).addTo(map);
 
 var panic_payload = [],
-  marker_bool = [],
   data_arr = [],
-  inactiveCount = [],
+  marker_bool = [],
   marker_arr = [],
   circle_arr = [],
   firstFetch = true;
@@ -51,12 +50,10 @@ devices_arr.forEach((device, i) => {
       out: false,
       limit: false,
       panic: false,
-    })
-  );
-  inactiveCount.push(
-    new Object({
+      notif: false,
+      notifCount: NOTIFICATION_STALE_DURATION,
       lastId: 0,
-      count: 0,
+      inactiveCount: 0,
     })
   );
 
@@ -87,21 +84,21 @@ function updateMarker() {
     data_arr[i] = data_arr[i].feeds[0];
 
     if (firstFetch) {
-      inactiveCount[i].lastId = data_arr[i].entry_id;
-    } else if (inactiveCount[i].lastId !== data_arr[i].entry_id) {
-      inactiveCount[i].lastId = data_arr[i].entry_id;
-      inactiveCount[i].count = 0;
+      marker_bool[i].lastId = data_arr[i].entry_id;
+    } else if (marker_bool[i].lastId !== data_arr[i].entry_id) {
+      marker_bool[i].lastId = data_arr[i].entry_id;
+      marker_bool[i].inactiveCount = 0;
       device.active = true;
     } else if (
-      inactiveCount[i].lastId === data_arr[i].entry_id &&
+      marker_bool[i].lastId === data_arr[i].entry_id &&
       device.active
     ) {
-      inactiveCount[i].count = inactiveCount[i].count + 1;
+      marker_bool[i].inactiveCount = marker_bool[i].inactiveCount + 1;
     }
 
     // disable for inactive device
-    if (inactiveCount[i].count >= 60) {
-      inactiveCount[i].count = 0;
+    if (marker_bool[i].inactiveCount >= INACTIVITY_DURATION) {
+      marker_bool[i].inactiveCount = 0;
       device.active = false;
     }
   });
@@ -122,6 +119,7 @@ function updateMarker() {
       panic_payload[i] = payload;
       panic_payload[i] = panic_payload[i].feeds[0];
       marker_bool[i].panic = true;
+      // TO DO PANIC BUTTON NOTIFICATION
       setTimeout(() => {
         marker_bool[i].panic = false;
       }, 60000);
@@ -168,7 +166,7 @@ function updateMarker() {
       ? "ON"
       : "OFF";
 
-    // Set the marker position (enable for production)
+    // Set the marker position (enable for production, disable for development)
     marker_arr[i].setLatLng(L.latLng(data_arr[i].field5, data_arr[i].field6));
 
     //condition on limit params
@@ -277,15 +275,37 @@ function updateMarker() {
       statusPersonDiv.remove("person-status-panic");
       statusPersonDiv.remove("person-status-limit-out");
     }
+
+    // notification pop
+    if (
+      !marker_bool[i].notif &&
+      (marker_bool[i].limit || marker_bool[i].out) &&
+      marker_bool[i].notifCount >= NOTIFICATION_STALE_DURATION &&
+      devices_arr[i].active
+    ) {
+      popNotification(
+        new Date(),
+        devices_arr[i].device_name,
+        PARAMS_MSG,
+        data_arr[i],
+        devices_arr[i].id
+      );
+      marker_bool[i].notif = true;
+      marker_bool[i].notifCount = 0;
+      console.log(marker_bool);
+    } else if (!marker_bool[i].notif && devices_arr[i].active) {
+      marker_bool[i].notifCount = marker_bool[i].notifCount + 1;
+    }
   });
-  // console.log(marker_bool);
 }
 updateMarker();
 setInterval(updateMarker, 1000);
 
-// TESTING ON DEVELOPMENT 
+// TESTING ON DEVELOPMENT
 // setTimeout(() => (devices_arr[0].active = true), 5000);
-// setTimeout(() => (devices_arr[1].active = true), 10000);
+// setTimeout(() => (devices_arr[1].active = true), 8000);
+// setTimeout(() => (devices_arr[2].active = true), 11000);
+// setTimeout(() => (devices_arr[3].active = true), 14000);
 // setTimeout(() => marker_arr[0].setLatLng([-6.363, 106.824]), 8000)
 // setTimeout(() => devices_arr[0].active = false, 18000)
 // setTimeout(() => devices_arr[1].active = false, 12000)

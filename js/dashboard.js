@@ -45,28 +45,30 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+const monthNames = [
+  "Januari",
+  "Februari",
+  "Maret",
+  "April",
+  "Mei",
+  "Juni",
+  "July",
+  "Agustus",
+  "September",
+  "Oktober",
+  "November",
+  "Desember",
+];
+
+var timeFormat = (number) => {
+  if (number < 10) return `0${number}`
+  else return number
+}
+
 function updateTime() {
   var dateText = document.querySelector(".date-time").querySelector(".date");
   var timeText = document.querySelector(".date-time").querySelector(".time");
-  const monthNames = [
-    "Januari",
-    "Februari",
-    "Maret",
-    "April",
-    "Mei",
-    "Juni",
-    "July",
-    "Agustus",
-    "September",
-    "Oktober",
-    "November",
-    "Desember",
-  ];
   var currentDate = new Date();
-  var timeFormat = (number) => {
-    if (number < 10) return `0${number}`
-    else return number
-  }
   dateText.innerHTML = `${currentDate.getDate()} ${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
   timeText.innerHTML = `${timeFormat(currentDate.getHours())} : ${timeFormat(currentDate.getMinutes())} : ${timeFormat(currentDate.getSeconds())}`;
 }

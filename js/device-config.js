@@ -77,6 +77,7 @@ const HR_PARAMS = [50, 100];
 // Time Setting (seconds)
 const INACTIVITY_DURATION = 60;
 const NOTIFICATION_STALE_DURATION = 60;
+const PANIC_DURATION = 60
 
 // CONTENT RESOURCE
 const PARAMS_MSG = "Parameter di luar limit!";

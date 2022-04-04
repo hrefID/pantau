@@ -122,7 +122,7 @@ function updateMarker() {
       // TO DO PANIC BUTTON NOTIFICATION
       setTimeout(() => {
         marker_bool[i].panic = false;
-      }, 60000);
+      }, PANIC_DURATION * 1000);
     }
   });
 

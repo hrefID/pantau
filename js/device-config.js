@@ -42,7 +42,6 @@ var devices_arr = [
 var markerIcon = L.Icon.extend({
   options: {
     shadowUrl: "css/images/marker-shadow.png",
-
     iconSize: [40, 40], // size of the icon
     shadowSize: [41, 41], // size of the shadow
     iconAnchor: [20, 40], // point of the icon which will correspond to marker's location
@@ -58,13 +57,6 @@ var greenIcon = new markerIcon({ iconUrl: "css/images/marker-green.png" }),
   blackIcon = new markerIcon({ iconUrl: "css/images/marker-black.png" }),
   orangeIcon = new markerIcon({ iconUrl: "css/images/marker-orange.png" });
 
-// Markers for Development Purposes
-var marker_1 = L.marker([-6.36, 106.824], { icon: blueIcon });
-var marker_2 = L.marker([-6.363, 106.823], { icon: blueIcon });
-var marker_3 = L.marker([-6.366, 106.825], { icon: blueIcon });
-var marker_4 = L.marker([-6.367, 106.824], { icon: blueIcon });
-var marker_arr = [marker_1, marker_2, marker_3, marker_4];
-
 // Area settings
 var circleOption = {
   color: "green",
@@ -73,8 +65,7 @@ var circleOption = {
   radius: 200,
 }
 
-var circleOne = L.circle([-6.36, 106.824], new Object(circleOption))
-var circleTwo = L.circle([-6.36, 106.824], new Object(circleOption))
-var circleThree = L.circle([-6.36, 106.824], new Object(circleOption))
-var circleFour = L.circle([-6.36, 106.824], new Object(circleOption))
-var circle_arr = [circleOne, circleTwo, circleThree, circleFour]
+// Params Settting [MIN, MAX], set to null for no params
+const TEMP_PARAMS = [null, 37.5]
+const SPO2_PARAMS = [93, 100]
+const HR_PARAMS = [50, 100]

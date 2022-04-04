@@ -17,37 +17,23 @@ L.tileLayer(
 var panic_payload = [],
   marker_bool = [],
   data_arr = [],
-  inactiveCount = [
-    {
-      lastId: 0,
-      count: 0,
-    },
-    {
-      lastId: 0,
-      count: 0,
-    },
-    {
-      lastId: 0,
-      count: 0,
-    },
-    {
-      lastId: 0,
-      count: 0,
-    },
-  ];
-firstFetch = true;
+  inactiveCount = [],
+  marker_arr = [],
+  circle_arr = [],
+  firstFetch = true;
 
-// console.log(inactiveCount);
-// set marker bool initial value as condition params
-for (i = 0; i < marker_arr.length; i++) {
-  marker_bool.push(
-    new Object({
-      out: false,
-      limit: false,
-      panic: false,
-    })
-  );
-}
+// Markers & Circle for Development!!!
+// var marker_1 = L.marker([-6.36, 106.824], { icon: blueIcon });
+// var marker_2 = L.marker([-6.363, 106.823], { icon: blueIcon });
+// var marker_3 = L.marker([-6.366, 106.825], { icon: blueIcon });
+// var marker_4 = L.marker([-6.367, 106.824], { icon: blueIcon });
+// var marker_arr_2 = [marker_1, marker_2, marker_3, marker_4];
+
+// var circleOne = L.circle([-6.36, 106.824], new Object(circleOption))
+// var circleTwo = L.circle([-6.36, 106.824], new Object(circleOption))
+// var circleThree = L.circle([-6.36, 106.824], new Object(circleOption))
+// var circleFour = L.circle([-6.36, 106.824], new Object(circleOption))
+// var circle_arr_2 = [circleOne, circleTwo, circleThree, circleFour]
 
 devices_arr.forEach((device, i) => {
   var link = device.history_url;
@@ -58,6 +44,36 @@ devices_arr.forEach((device, i) => {
   document
     .querySelectorAll(".person-status")
     [i].querySelector(".person-name").innerHTML = name || "Undefined";
+
+  // set marker bool initial value as condition params
+  marker_bool.push(
+    new Object({
+      out: false,
+      limit: false,
+      panic: false,
+    })
+  );
+  inactiveCount.push(
+    new Object({
+      lastId: 0,
+      count: 0,
+    })
+  );
+
+  // set marker & circle
+  marker_arr.push(
+    new Object(
+      new L.marker(
+        [-6.36 - Math.random() * 0.01, 106.82 + Math.random() * 0.01],
+        { icon: blueIcon }
+      )
+    )
+  );
+  circle_arr.push(
+    new Object(
+      new L.circle([Math.random(), Math.random()], new Object(circleOption))
+    )
+  );
 });
 
 function updateMarker() {
@@ -76,10 +92,14 @@ function updateMarker() {
       inactiveCount[i].lastId = data_arr[i].entry_id;
       inactiveCount[i].count = 0;
       device.active = true;
-    } else if (inactiveCount[i].lastId === data_arr[i].entry_id && device.active) {
+    } else if (
+      inactiveCount[i].lastId === data_arr[i].entry_id &&
+      device.active
+    ) {
       inactiveCount[i].count = inactiveCount[i].count + 1;
     }
 
+    // disable for inactive device
     if (inactiveCount[i].count >= 60) {
       inactiveCount[i].count = 0;
       device.active = false;
@@ -117,7 +137,6 @@ function updateMarker() {
     if (device.active && personDiv.classList.contains("hide")) {
       personDiv.classList.remove("hide");
       marker_arr[i].addTo(map);
-      // circle_arr[i].setLatLng(L.latLng(data_arr[i].field5, data_arr[i].field6))
       circle_arr[i].setLatLng(marker_arr[i].getLatLng());
       circle_arr[i].addTo(map);
     } else if (!device.active && !personDiv.classList.contains("hide")) {
@@ -149,21 +168,26 @@ function updateMarker() {
       ? "ON"
       : "OFF";
 
-    //Set the marker position (enable for production)
+    // Set the marker position (enable for production)
     marker_arr[i].setLatLng(L.latLng(data_arr[i].field5, data_arr[i].field6));
 
     //condition on limit params
     var fieldInt = [
+      // SPO2
       parseInt(el.field1),
+      // HEART RATE
       parseInt(el.field2),
+      // TEMPERATURE
       parseInt(el.field3),
     ];
+
     if (
-      fieldInt[0] > 100 ||
-      fieldInt[0] < 93 ||
-      fieldInt[1] < 50 ||
-      fieldInt[1] > 100 ||
-      fieldInt[2] > 37.5
+      (SPO2_PARAMS[0] && fieldInt[0] < SPO2_PARAMS[0]) ||
+      (SPO2_PARAMS[1] && fieldInt[0] > SPO2_PARAMS[1]) ||
+      (HR_PARAMS[0] && fieldInt[1] < HR_PARAMS[0]) ||
+      (HR_PARAMS[1] && fieldInt[1] > HR_PARAMS[1]) ||
+      (TEMP_PARAMS[0] && fieldInt[2] < TEMP_PARAMS[0]) ||
+      (TEMP_PARAMS[1] && fieldInt[2] > TEMP_PARAMS[1])
     )
       marker_bool[i].limit = true;
     else marker_bool[i].limit = false;
@@ -258,8 +282,10 @@ function updateMarker() {
 }
 updateMarker();
 setInterval(updateMarker, 1000);
+
+// TESTING ON DEVELOPMENT 
 // setTimeout(() => (devices_arr[0].active = true), 5000);
-// setTimeout(() => (devices_arr[0].active = true), 20000);
+// setTimeout(() => (devices_arr[1].active = true), 10000);
 // setTimeout(() => marker_arr[0].setLatLng([-6.363, 106.824]), 8000)
 // setTimeout(() => devices_arr[0].active = false, 18000)
 // setTimeout(() => devices_arr[1].active = false, 12000)

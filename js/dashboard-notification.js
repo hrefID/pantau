@@ -1,4 +1,4 @@
-function popNotification(currentDate, deviceName, message, data, id) {
+function popNotification(currentDate, deviceName, message, data, id, color) {
   var newDiv = document.createElement("div");
   newDiv.className = "notification";
   var crossElement = document.createElement("a");
@@ -16,9 +16,7 @@ function popNotification(currentDate, deviceName, message, data, id) {
 
   newDiv
     .appendChild(document.createElement("h5"))
-    .appendChild(
-      document.createTextNode(id)
-    );
+    .appendChild(document.createTextNode(id));
   newDiv
     .appendChild(document.createElement("h3"))
     .appendChild(
@@ -47,7 +45,7 @@ function popNotification(currentDate, deviceName, message, data, id) {
     );
 
   newDiv
-    .appendChild(document.createElement("p"))
+    .appendChild(document.createElement("a"))
     .appendChild(
       document.createTextNode(
         `${timeFormat(currentDate.getHours())} : ${timeFormat(
@@ -59,9 +57,11 @@ function popNotification(currentDate, deviceName, message, data, id) {
         } ${currentDate.getFullYear()} `
       )
     );
-  newDiv
-    .querySelectorAll("p")
-    [newDiv.querySelectorAll("p").length - 1].classList.add("date");
+  var dateElement =
+    newDiv.querySelectorAll("a")[newDiv.querySelectorAll("a").length - 1];
+  dateElement.classList.add("date");
+  dateElement.setAttribute("href", "#");
+  dateElement.style.backgroundColor = color;
 
   var notificationsDiv = document.querySelector(".notifications");
   notificationsDiv.querySelectorAll("div").length === 0
@@ -70,7 +70,7 @@ function popNotification(currentDate, deviceName, message, data, id) {
         newDiv,
         notificationsDiv.lastChild.nextSibling
       );
-      
+
   document.getElementById("notificationAudio").pause();
   document.getElementById("notificationAudio").currentTime = 0;
   document.getElementById("notificationAudio").play();
@@ -78,22 +78,33 @@ function popNotification(currentDate, deviceName, message, data, id) {
   document.querySelectorAll(".cross").forEach((a) => {
     a.addEventListener("click", (e) => {
       e.preventDefault();
-      removeNotification(a)
+      removeNotification(a);
       document.getElementById("notificationAudio").pause();
       document.getElementById("notificationAudio").currentTime = 0;
+    });
+  });
+
+  document.querySelectorAll(".date").forEach((a) => {
+    a.addEventListener("click", (e) => {
+      e.preventDefault();
+      var id = parseInt(a.parentElement.querySelector("h5").innerHTML);
+      var indexID = devices_arr.map((device) => device.id).indexOf(id);
+      goToMarker(indexID)
     });
   });
 }
 
 var removeNotification = (a) => {
-  var id = parseInt(a.parentElement.querySelector('h5').innerHTML)
-  var indexID = devices_arr.map(device => device.id).indexOf(id)
+  var id = parseInt(a.parentElement.querySelector("h5").innerHTML);
+  var indexID = devices_arr.map((device) => device.id).indexOf(id);
   marker_bool[indexID].notif = false;
-  devices_arr[indexID].active ? marker_bool[indexID].notifCount = 0 : marker_bool[indexID].notifCount = NOTIFICATION_STALE_DURATION;
+  devices_arr[indexID].active
+    ? (marker_bool[indexID].notifCount = 0)
+    : (marker_bool[indexID].notifCount = NOTIFICATION_STALE_DURATION);
   a.parentElement.remove();
-}
+};
 
-// popup notification on history device 0 click
+// popup notification on history device 0 click (development)
 // document
 //   .querySelectorAll(".person-history")[0]
 //   .addEventListener("click", (e) => {

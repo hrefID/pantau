@@ -119,7 +119,14 @@ function updateMarker() {
       panic_payload[i] = payload;
       panic_payload[i] = panic_payload[i].feeds[0];
       marker_bool[i].panic = true;
-      // TO DO PANIC BUTTON NOTIFICATION
+      popNotification(
+        new Date(),
+        devices_arr[i].device_name,
+        PANIC_MSG,
+        data_arr[i],
+        devices_arr[i].id,
+        PANIC_NOTIF_COLOR
+      )
       setTimeout(() => {
         marker_bool[i].panic = false;
       }, PANIC_DURATION * 1000);
@@ -288,15 +295,16 @@ function updateMarker() {
         devices_arr[i].device_name,
         PARAMS_MSG,
         data_arr[i],
-        devices_arr[i].id
+        devices_arr[i].id,
+        PARAMS_NOTIF_COLOR
       );
       marker_bool[i].notif = true;
       marker_bool[i].notifCount = 0;
-      console.log(marker_bool);
     } else if (!marker_bool[i].notif && devices_arr[i].active) {
       marker_bool[i].notifCount = marker_bool[i].notifCount + 1;
     }
   });
+  // console.log(marker_bool);
 }
 updateMarker();
 setInterval(updateMarker, 1000);
@@ -311,22 +319,26 @@ setInterval(updateMarker, 1000);
 // setTimeout(() => devices_arr[1].active = false, 12000)
 
 // go to marker if the name of device is clicked
+var goToMarker = (index) => {
+  if (marker_arr[index]) {
+    map.setView(
+      [
+        marker_arr[index].getLatLng().lat,
+        marker_arr[index].getLatLng().lng,
+      ],
+      16
+    );
+  } else alert("The device is not available");
+}
+
 document.querySelectorAll(".person-name").forEach((a) => {
   a.addEventListener("click", (e) => {
     var divs = Array.from(document.querySelectorAll(".person-status"));
     var el = e.target.parentElement;
     var elIndex = divs.indexOf(el);
+    goToMarker(elIndex)
 
-    if (marker_arr[elIndex]) {
-      map.setView(
-        [
-          marker_arr[elIndex].getLatLng().lat,
-          marker_arr[elIndex].getLatLng().lng,
-        ],
-        16
-      );
-    } else alert("The device is not available");
-
+    // on mobile, immediately toggle toolbar
     if (document.documentElement.clientWidth < 768) {
       document.querySelector(".toolbar").classList.toggle("toolbar-active");
       document

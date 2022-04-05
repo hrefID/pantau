@@ -82,3 +82,7 @@ const PANIC_DURATION = 60
 // CONTENT RESOURCE
 const PARAMS_MSG = "Parameter di luar limit!";
 const PANIC_MSG = "Panic Button ditekan!"
+
+// POP NOTIFICATION COLOR
+const PANIC_NOTIF_COLOR = "#ff8c00"
+const PARAMS_NOTIF_COLOR = "#d42f26"

@@ -712,15 +712,18 @@ nav {
 }
 
 .notification .date{
+  display: block;
   margin-top: 1em;
   text-align: center;
   background-color: #d42f26;
   color: #fff;
   padding: 5px 0;
   border-radius: 10px;
+  font-size: 0.8rem;
+  text-decoration: none;
 }
 
-.notification a {
+.notification .cross {
   position: absolute;
   width: 20px;
   height: 20px;
@@ -730,8 +733,8 @@ nav {
   margin: 10px;
 }
 
-.notification a .left-cross,
-.notification a .right-cross {
+.notification .cross .left-cross,
+.notification .cross .right-cross {
   background-color: #000;
   width: 100%;
   height: 5px;
@@ -743,16 +746,16 @@ nav {
   transition: all ease 0.1s;
 }
 
-.notification a .left-cross {
+.notification .cross .left-cross {
   transform: rotate(45deg);
 }
 
-.notification a .right-cross {
+.notification .cross .right-cross {
   transform: rotate(-45deg);
 }
 
-.notification a:hover .left-cross,
-.notification a:hover .right-cross {
+.notification .cross:hover .left-cross,
+.notification .cross:hover .right-cross {
   background-color: #4388f5;
 }
 

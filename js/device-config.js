@@ -1,42 +1,42 @@
 // put the corresponding api and public channel in the array
 var devices_arr = [
   {
-    device_name: "Elian Richard",
+    device_name: "Ones",
     api_url:
-      "https://api.thingspeak.com/channels/1647842/feeds.json?api_key=BG370R10VM3PR7BC&results=1",
+      "https://api.thingspeak.com/channels/1647842/feeds.json?results=1",
     api_panic:
-      "https://api.thingspeak.com/channels/1662283/feeds.json?api_key=D8HQD2OAKS3BFQ5C&results=1",
+      "https://api.thingspeak.com/channels/1662283/feeds.json?results=1",
     history_url: "https://thingspeak.com/channels/1647842",
     active: false,
     id: 1,
   },
   {
-    device_name: "Alvin Filipi",
+    device_name: "Richard",
     api_url:
-      "https://api.thingspeak.com/channels/1647842/feeds.json?api_key=BG370R10VM3PR7BC&results=1",
+      "https://api.thingspeak.com/channels/1698018/feeds.json?results=1",
     api_panic:
-      "https://api.thingspeak.com/channels/1662283/feeds.json?api_key=D8HQD2OAKS3BFQ5C&results=1",
-    history_url: "https://thingspeak.com/channels/1647842",
+      "https://api.thingspeak.com/channels/1698019/feeds.json?results=1",
+    history_url: "https://thingspeak.com/channels/1698018",
     active: false,
     id: 2,
   },
   {
-    device_name: "Joe Biden",
+    device_name: "Dheannies",
     api_url:
-      "https://api.thingspeak.com/channels/1647842/feeds.json?api_key=BG370R10VM3PR7BC&results=1",
+      "https://api.thingspeak.com/channels/1686022/feeds.json?results=1",
     api_panic:
-      "https://api.thingspeak.com/channels/1662283/feeds.json?api_key=D8HQD2OAKS3BFQ5C&results=1",
-    history_url: "https://thingspeak.com/channels/1647842",
+      "https://api.thingspeak.com/channels/1686026/feeds.json?results=1",
+    history_url: "https://thingspeak.com/channels/1686022",
     active: false,
     id: 3,
   },
   {
-    device_name: "Joe Biden2",
+    device_name: "Eja",
     api_url:
-      "https://api.thingspeak.com/channels/1647842/feeds.json?api_key=BG370R10VM3PR7BC&results=1",
+      "https://api.thingspeak.com/channels/1699482/feeds.json?results=1",
     api_panic:
-      "https://api.thingspeak.com/channels/1662283/feeds.json?api_key=D8HQD2OAKS3BFQ5C&results=1",
-    history_url: "https://thingspeak.com/channels/1647842",
+      "https://api.thingspeak.com/channels/1699484/feeds.json?results=1",
+    history_url: "https://thingspeak.com/channels/1699482",
     active: false,
     id: 4,
   },

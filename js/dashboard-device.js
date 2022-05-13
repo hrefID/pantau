@@ -134,7 +134,7 @@ function updateMarker() {
   });
 
   firstFetch = false;
-  // console.log(panic_payload)
+  // console.log(panic_payload, "panic payload")
 
   // update UI on device active status
   devices_arr.forEach((device, i) => {
@@ -200,8 +200,8 @@ function updateMarker() {
 
   //Set marker popup
   marker_arr.forEach((marker, i) => {
-    var markerLat = marker.getLatLng().lat;
-    var markerLng = marker.getLatLng().lng;
+    var markerLat = marker.getLatLng()?.lat || null;
+    var markerLng = marker.getLatLng()?.lng || null;
 
     marker.bindPopup(
       `<b class='bold'>${devices_arr.name}</b>

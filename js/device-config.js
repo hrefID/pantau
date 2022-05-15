@@ -66,7 +66,7 @@ var circleOption = {
   color: "green",
   fillColor: "#007820",
   fillOpacity: 0.3,
-  radius: 200,
+  radius: 200, //in meters
 };
 
 // Params Setting [MIN, MAX], set to null for no params

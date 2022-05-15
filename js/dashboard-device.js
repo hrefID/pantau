@@ -105,6 +105,7 @@ function updateMarker() {
   // console.log(inactiveCount)
   // console.log("data_arr", data_arr);
 
+  //fetch panic button api
   devices_arr.forEach((device, i) => {
     var url = device.api_panic;
     var payload = JSON.parse(Get(url));

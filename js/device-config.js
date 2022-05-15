@@ -75,6 +75,7 @@ const SPO2_PARAMS = [93, 100];
 const HR_PARAMS = [50, 100];
 
 // Time Setting (seconds)
+const REFRESH_TIME = 1;
 const INACTIVITY_DURATION = 60;
 const NOTIFICATION_STALE_DURATION = 60;
 const PANIC_DURATION = 60

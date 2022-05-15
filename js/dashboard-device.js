@@ -307,7 +307,7 @@ function updateMarker() {
   // console.log(marker_bool);
 }
 updateMarker();
-setInterval(updateMarker, 1000);
+setInterval(updateMarker, REFRESH_TIME * 1000);
 
 // TESTING ON DEVELOPMENT
 // setTimeout(() => (devices_arr[0].active = true), 5000);

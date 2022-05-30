@@ -10,16 +10,16 @@ var devices_arr = [
     active: false,
     id: 1,
   },
-  // {
-  //   device_name: "Richard",
-  //   api_url:
-  //     "https://api.thingspeak.com/channels/1698018/feeds.json?results=1",
-  //   api_panic:
-  //     "https://api.thingspeak.com/channels/1698019/feeds.json?results=1",
-  //   history_url: "https://thingspeak.com/channels/1698018",
-  //   active: false,
-  //   id: 2,
-  // },
+  {
+    device_name: "Richard",
+    api_url:
+      "https://api.thingspeak.com/channels/1698018/feeds.json?results=1",
+    api_panic:
+      "https://api.thingspeak.com/channels/1698019/feeds.json?results=1",
+    history_url: "https://thingspeak.com/channels/1698018",
+    active: false,
+    id: 2,
+  },
   {
     device_name: "Dheannies",
     api_url:

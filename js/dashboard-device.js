@@ -127,7 +127,7 @@ function updateMarker() {
         data_arr[i],
         devices_arr[i].id,
         PANIC_NOTIF_COLOR
-      )
+      );
       setTimeout(() => {
         marker_bool[i].panic = false;
       }, PANIC_DURATION * 1000);
@@ -297,7 +297,8 @@ function updateMarker() {
         PARAMS_MSG,
         data_arr[i],
         devices_arr[i].id,
-        PARAMS_NOTIF_COLOR
+        PARAMS_NOTIF_COLOR,
+        marker_bool[i].out
       );
       marker_bool[i].notif = true;
       marker_bool[i].notifCount = 0;
@@ -323,21 +324,18 @@ setInterval(updateMarker, REFRESH_TIME * 1000);
 var goToMarker = (index) => {
   if (marker_arr[index]) {
     map.setView(
-      [
-        marker_arr[index].getLatLng().lat,
-        marker_arr[index].getLatLng().lng,
-      ],
+      [marker_arr[index].getLatLng().lat, marker_arr[index].getLatLng().lng],
       16
     );
   } else alert("The device is not available");
-}
+};
 
 document.querySelectorAll(".person-name").forEach((a) => {
   a.addEventListener("click", (e) => {
     var divs = Array.from(document.querySelectorAll(".person-status"));
     var el = e.target.parentElement;
     var elIndex = divs.indexOf(el);
-    goToMarker(elIndex)
+    goToMarker(elIndex);
 
     // on mobile, immediately toggle toolbar
     if (document.documentElement.clientWidth < 768) {

@@ -1,4 +1,12 @@
-function popNotification(currentDate, deviceName, message, data, id, color) {
+function popNotification(
+  currentDate,
+  deviceName,
+  message,
+  data,
+  id,
+  color,
+  outParams
+) {
   var newDiv = document.createElement("div");
   newDiv.className = "notification";
   var crossElement = document.createElement("a");
@@ -25,24 +33,20 @@ function popNotification(currentDate, deviceName, message, data, id, color) {
   newDiv
     .appendChild(document.createElement("h4"))
     .appendChild(document.createTextNode(message));
-  newDiv
-    .appendChild(document.createElement("p"))
-    .appendChild(
-      document.createTextNode(
-        `Temp: ${data.field3 || "null"} | SO2: ${
-          data.field1 || "null"
-        } | Heartbeat: ${data.field2 || "null"}`
-      )
-    );
-  newDiv
-    .appendChild(document.createElement("p"))
-    .appendChild(
-      document.createTextNode(
-        `Longitude: ${data.field6 || "null"} | Latitude: ${
-          data.field5 || "null"
-        }`
-      )
-    );
+  newDiv.appendChild(document.createElement("p")).innerHTML = `<span class="${
+    data.field3 > TEMP_PARAMS[1] && "text-warning"
+  }">Temp: ${data.field3 || "null"}</span> | <span class="${
+    (data.field1 > SPO2_PARAMS[1] || data.field1 < SPO2_PARAMS[0]) &&
+    "text-warning"
+  }">SO2: ${data.field1 || "null"}</span> | <span class="${
+    (data.field2 > HR_PARAMS[1] || data.field2 < HR_PARAMS[0]) && "text-warning"
+  }">Heartbeat: ${data.field2 || "null"}</span>`;
+
+  newDiv.appendChild(document.createElement("p")).innerHTML = `<span class="${
+    outParams && "text-warning"
+  }">Longitude: ${data.field6 || "null"} | Latitude: ${
+    data.field5 || "null"
+  }</span>`;
 
   newDiv
     .appendChild(document.createElement("a"))
@@ -89,7 +93,7 @@ function popNotification(currentDate, deviceName, message, data, id, color) {
       e.preventDefault();
       var id = parseInt(a.parentElement.querySelector("h5").innerHTML);
       var indexID = devices_arr.map((device) => device.id).indexOf(id);
-      goToMarker(indexID)
+      goToMarker(indexID);
     });
   });
 }

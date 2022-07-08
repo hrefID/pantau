@@ -38,7 +38,7 @@ function popNotification(
   }">Temp: ${data.field3 || "null"}</span> | <span class="${
     (data.field1 > SPO2_PARAMS[1] || data.field1 < SPO2_PARAMS[0]) &&
     "text-warning"
-  }">SO2: ${data.field1 || "null"}</span> | <span class="${
+  }">SpO2: ${data.field1 || "null"}</span> | <span class="${
     (data.field2 > HR_PARAMS[1] || data.field2 < HR_PARAMS[0]) && "text-warning"
   }">Heartbeat: ${data.field2 || "null"}</span>`;
 

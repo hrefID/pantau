@@ -72,7 +72,7 @@ var circleOption = {
 // Params Setting [MIN, MAX], set to null for no params
 const TEMP_PARAMS = [null, 37.5];
 const SPO2_PARAMS = [95, 100];
-const HR_PARAMS = [50, 100];
+const HR_PARAMS = [60, 120];
 
 // Time Setting (seconds)
 const REFRESH_TIME = 1;
